@@ -1,6 +1,6 @@
 # React State Architecture & Shifting Grid Math
 
-This document explains the software architecture, state lifecycle, and calendar coordinate geometry utilized in Bloom.
+This document explains the software architecture, state lifecycle, and calendar coordinate geometry utilized in Selene.
 
 ---
 
@@ -30,7 +30,7 @@ graph TD
 
 Period start/end dates must represent continuous intervals. Overlapping ranges are biologically impossible and would break cycle average calculations. 
 
-Bloom prevents collisions by enforcing a mathematical boundary check before permitting any period save:
+Selene prevents collisions by enforcing a mathematical boundary check before permitting any period save:
 $$\text{Start}_A \le \text{End}_B \quad \land \quad \text{Start}_B \le \text{End}_A$$
 
 ```javascript
@@ -56,7 +56,7 @@ export function hasPeriodOverlap(periods, newPeriod, excludeIndex = -1, todayStr
 
 ## 3. Shifting Calendar Grid Geometry
 
-In standard calendar grids, cell indexes are static. In Bloom's **Cycle-Specific Grid View**, the layout shifts so that **Day 1 of the active cycle is positioned directly on its actual starting weekday column** (e.g. if the period started on a Thursday, Day 1 falls under `THU`), and all weekday headers (`SUN`–`SAT`) remain fixed.
+In standard calendar grids, cell indexes are static. In Selene's **Cycle-Specific Grid View**, the layout shifts so that **Day 1 of the active cycle is positioned directly on its actual starting weekday column** (e.g. if the period started on a Thursday, Day 1 falls under `THU`), and all weekday headers (`SUN`–`SAT`) remain fixed.
 
 ```
 Cycle starts on Thursday (April 18):

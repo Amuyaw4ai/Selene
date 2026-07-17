@@ -1,12 +1,12 @@
 # AI Collaboration Log: Hallucinations & Corrections
 
-This document exposes the developmental timeline of Bloom under pair-programming with the AI coding assistant (**Anti-Gravity**). It documents the original user prompts, moments of AI reasoning failure (hallucinations), and the structural corrections applied to make the application client-ready.
+This document exposes the developmental timeline of Selene under pair-programming with the AI coding assistant (**Anti-Gravity**). It documents the original user prompts, moments of AI reasoning failure (hallucinations), and the structural corrections applied to make the application client-ready.
 
 ---
 
 ## 1. Timeline of Core Prompts
 
-Below are the pivotal prompts fed to Anti-Gravity that defined Bloom's feature set:
+Below are the pivotal prompts fed to Anti-Gravity that defined Selene's feature set:
 
 1. **Cycle-Specific View Pivot:**
    > *"The cycle view of our cycle specific grid layout is only working for the current or running period... Say I move to the April month and I switch to cycle view, it should show the cycle view of the April month, because that would have its own start date and end date..."*

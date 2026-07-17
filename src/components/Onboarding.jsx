@@ -85,7 +85,7 @@ export default function Onboarding({ onComplete }) {
             <div className="p-3 bg-rose-500 rounded-2xl text-white shadow-md animate-bounce-slow">
               <Heart className="h-8 w-8 fill-current" />
             </div>
-            <h1 className="text-2xl font-bold text-slate-900 mt-2">Bloom Cycle Tracker</h1>
+            <h1 className="text-2xl font-bold text-slate-900 mt-2">Selene Cycle Tracker</h1>
             <p className="text-xs text-rose-500 font-semibold tracking-wider uppercase">Onboarding Setup</p>
           </div>
 
@@ -94,7 +94,7 @@ export default function Onboarding({ onComplete }) {
             <form onSubmit={handleNextStep1} className="flex flex-col gap-4">
               <div className="text-center">
                 <p className="text-sm text-slate-500 leading-relaxed">
-                  Welcome to Bloom, a local-only, private menstrual tracking and symptothermal calibration dashboard. Let's start with your profile.
+                  Welcome to Selene, a local-only, private menstrual tracking and symptothermal calibration dashboard. Let's start with your profile.
                 </p>
               </div>
 
@@ -133,7 +133,7 @@ export default function Onboarding({ onComplete }) {
                   required
                   className="p-3 bg-slate-50 border border-slate-200 rounded-xl text-sm focus:outline-none focus:ring-2 focus:ring-rose-500/20 focus:border-rose-500 font-mono"
                 />
-                <span className="text-[10px] text-slate-400">If unsure, leave as 28 days. Bloom will recalibrate dynamically.</span>
+                <span className="text-[10px] text-slate-400">If unsure, leave as 28 days. Selene will recalibrate dynamically.</span>
               </div>
 
               <button
@@ -320,7 +320,7 @@ export default function Onboarding({ onComplete }) {
 
               <div className="bg-slate-50 border border-slate-200 p-4 rounded-2xl text-xs leading-relaxed text-slate-500 text-left flex flex-col gap-2">
                 <p>
-                  Bloom has initialized your account. Based on your inputs, the mathematical engine will now predict your cycle intervals, ovulation, and fertile windows.
+                  Selene has initialized your account. Based on your inputs, the mathematical engine will now predict your cycle intervals, ovulation, and fertile windows.
                 </p>
                 <div className="flex gap-2 items-start text-amber-800 bg-amber-50 p-2.5 rounded-lg border border-amber-100 mt-1">
                   <AlertTriangle className="h-4 w-4 shrink-0 text-amber-500 mt-0.5" />

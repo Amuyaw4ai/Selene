@@ -30,7 +30,16 @@ const TODAY_STR = formatDate(new Date());
 export function useCycleData() {
   const [userProfile, setUserProfile] = useState(() => {
     try {
-      const saved = localStorage.getItem('bloom_user_profile');
+      // Migrate from bloom_user_profile to selene_user_profile if needed
+      let saved = localStorage.getItem('selene_user_profile');
+      if (!saved) {
+        const legacySaved = localStorage.getItem('bloom_user_profile');
+        if (legacySaved) {
+          saved = legacySaved;
+          localStorage.setItem('selene_user_profile', legacySaved);
+          localStorage.removeItem('bloom_user_profile');
+        }
+      }
       return saved ? JSON.parse(saved) : null;
     } catch (e) {
       console.error('Error loading user profile', e);
@@ -82,9 +91,9 @@ export function useCycleData() {
   useEffect(() => {
     try {
       if (userProfile) {
-        localStorage.setItem('bloom_user_profile', JSON.stringify(userProfile));
+        localStorage.setItem('selene_user_profile', JSON.stringify(userProfile));
       } else {
-        localStorage.removeItem('bloom_user_profile');
+        localStorage.removeItem('selene_user_profile');
       }
     } catch (e) {
       console.error('Error saving user profile to localStorage', e);
@@ -225,18 +234,18 @@ export function useCycleData() {
       setPeriods([]);
       setDailySymptoms({});
       setUserProfile(null);
-      localStorage.removeItem('bloom_user_profile');
+      localStorage.removeItem('selene_user_profile');
     } else {
       setPeriods(MOCK_PERIODS);
       setDailySymptoms(MOCK_SYMPTOMS);
       const mockProfile = {
         name: 'Jane Doe',
-        email: 'jane@bloomapp.com',
+        email: 'jane@seleneapp.com',
         typicalCycleLength: 28,
         isOnboarded: true
       };
       setUserProfile(mockProfile);
-      localStorage.setItem('bloom_user_profile', JSON.stringify(mockProfile));
+      localStorage.setItem('selene_user_profile', JSON.stringify(mockProfile));
     }
   };
 

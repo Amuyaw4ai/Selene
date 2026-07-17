@@ -1,6 +1,6 @@
 # Biological Cycle Engine & Symptothermal Calculations
 
-This document details the core biological logic, mathematical formulas, and clinical protocols implemented within Bloom's cycle tracking engine (`src/utils/cycleEngine.js`).
+This document details the core biological logic, mathematical formulas, and clinical protocols implemented within Selene's cycle tracking engine (`src/utils/cycleEngine.js`).
 
 ---
 
@@ -26,7 +26,7 @@ graph TD
 
 ## 2. Mathematical Formulas & Engine Logic
 
-Rather than assuming a static, generic 28-day model, Bloom utilizes an **adaptive mathematical simulation** that updates in real-time as logs are added.
+Rather than assuming a static, generic 28-day model, Selene utilizes an **adaptive mathematical simulation** that updates in real-time as logs are added.
 
 ### A. Dynamic Cycle Length ($L_i$)
 A cycle length is defined as the number of days from the start of one period log to the start of the next chronological period log.
@@ -35,7 +35,7 @@ $$L_i = \text{Date}(\text{Start}_{i+1}) - \text{Date}(\text{Start}_i)$$
 ### B. Rolling Average Cycle Length ($\text{Avg } L$)
 Computed retrospectively using all completed historical cycle lengths:
 $$\text{Avg } L = \frac{1}{N-1} \sum_{i=1}^{N-1} L_i$$
-*If the user has fewer than 2 logged periods, Bloom falls back to the configured onboarding baseline (defaulting to 28 days).*
+*If the user has fewer than 2 logged periods, Selene falls back to the configured onboarding baseline (defaulting to 28 days).*
 
 ### C. Average Period Duration ($\text{Avg } D$)
 Calculated exclusively from completed periods (where an end date is explicitly logged):
@@ -43,7 +43,7 @@ $$\text{Avg } D = \frac{1}{M} \sum_{j=1}^{M} (\text{End}_j - \text{Start}_j + 1)
 *Default fallback: 5 days.*
 
 ### D. Ovulation Date Estimation ($O$)
-Biologically, the luteal phase (post-ovulation) remains highly consistent in duration (typically 14 days) compared to the follicular phase. Bloom projects the ovulation date by subtracting 14 days from the projected start of the next cycle:
+Biologically, the luteal phase (post-ovulation) remains highly consistent in duration (typically 14 days) compared to the follicular phase. Selene projects the ovulation date by subtracting 14 days from the projected start of the next cycle:
 $$O = \text{Start}_{\text{next}} - 14 \text{ days}$$
 For completed historical cycles, the ovulation date is calculated retrospectively as:
 $$O_i = \text{Start}_i + (L_i - 14)$$
@@ -57,7 +57,7 @@ Any day falling inside this range is classified as **High Fertility (Unsafe Wind
 
 ## 3. Symptothermal Double-Check Protocol
 
-Calendar projections are mathematical estimations. To verify ovulation, Bloom utilizes the **Symptothermal Method**, which cross-references projections with physical biological markers:
+Calendar projections are mathematical estimations. To verify ovulation, Selene utilizes the **Symptothermal Method**, which cross-references projections with physical biological markers:
 
 ### A. Basal Body Temperature (BBT) Thermal Shift
 Progesterone secreted by the corpus luteum immediately post-ovulation causes a sustained rise in waking body temperature:
@@ -82,7 +82,7 @@ Fertility State:   [  HIGH FERTILITY  ]     [   LOW FERTILITY  ]
 
 ## 4. Precedence of Day Classifications
 
-To ensure safety and clarity, Bloom classifies each day by running through a strict precedence hierarchy:
+To ensure safety and clarity, Selene classifies each day by running through a strict precedence hierarchy:
 
 1. **Logged Menstrual Period:** Direct user confirmation of active bleeding.
 2. **Logged Ovulation:** Verified via symptothermal shift.

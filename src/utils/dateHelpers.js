@@ -1,5 +1,5 @@
 /**
- * Timezone-safe date helper functions for Bloom Cycle Tracker.
+ * Timezone-safe date helper functions for Selene Cycle Tracker.
  * Employs local-time constructors and string-based comparisons to bypass timezone shift issues.
  */
 

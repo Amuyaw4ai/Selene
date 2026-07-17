@@ -235,7 +235,7 @@ function App() {
               <Heart className="h-6 w-6 fill-current animate-pulse" />
             </div>
             <div>
-              <h1 className="text-xl font-bold tracking-tight text-slate-900 leading-none">Bloom</h1>
+              <h1 className="text-xl font-bold tracking-tight text-slate-900 leading-none">Selene</h1>
               <span className="text-xs text-rose-500 font-medium">Cycle Tracker & Ovulation Predictor</span>
             </div>
           </div>
@@ -531,9 +531,9 @@ function App() {
       {/* Footer */}
       <footer className="bg-white border-t border-slate-200 mt-auto py-6">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs text-slate-400 flex flex-col gap-2">
-          <p>© 2026 Bloom Cycle Tracker. All calculations are mathematical approximations and should not be used as contraception.</p>
+          <p>© 2026 Selene Cycle Tracker. All calculations are mathematical approximations and should not be used as contraception.</p>
           <p className="max-w-3xl mx-auto leading-relaxed text-[10px] text-slate-450">
-            <strong>Medical Note:</strong> Bloom is an adaptive mathematical cycle tracking model. It is not a physical verification of ovulation and does not constitute medical advice or diagnostic service. Standard calendar-based tracking methods exhibit typical failure rates between 12% and 24%. Users are encouraged to double-check fertility indicators via symptothermal readings (daily waking temperature logging and cervical mucus consistency tracking).
+            <strong>Medical Note:</strong> Selene is an adaptive mathematical cycle tracking model. It is not a physical verification of ovulation and does not constitute medical advice or diagnostic service. Standard calendar-based tracking methods exhibit typical failure rates between 12% and 24%. Users are encouraged to double-check fertility indicators via symptothermal readings (daily waking temperature logging and cervical mucus consistency tracking).
           </p>
         </div>
       </footer>
@@ -586,7 +586,7 @@ function App() {
               {infoTopic === 'calculations' && (
                 <>
                   <p>
-                    Bloom utilizes a dynamic, personalized mathematical model that adapts to your actual cycle history rather than assuming a static 28-day schedule.
+                    Selene utilizes a dynamic, personalized mathematical model that adapts to your actual cycle history rather than assuming a static 28-day schedule.
                   </p>
                   <p className="font-bold text-slate-800">Key Calculations:</p>
                   <ul className="list-disc pl-5 flex flex-col gap-1.5">

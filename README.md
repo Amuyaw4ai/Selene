@@ -1,14 +1,14 @@
-# Bloom: Adaptive Symptothermal Cycle Tracker & Ovulation Predictor
+# Selene: Adaptive Symptothermal Cycle Tracker & Ovulation Predictor
 
-Bloom is an adaptive, symptothermal cycle tracking and ovulation prediction engine built using React, Vite, and custom biological algorithms. 
+Selene is an adaptive, symptothermal cycle tracking and ovulation prediction engine built using React, Vite, and custom biological algorithms. 
 
-Unlike traditional cycle trackers that rely on static, generic assumptions (e.g., assuming every user has a fixed 28-day cycle), Bloom adaptively recalculates fertility windows, rolling cycle averages, and post-ovulation temperature shifts in real-time as logs are added.
+Unlike traditional cycle trackers that rely on static, generic assumptions (e.g., assuming every user has a fixed 28-day cycle), Selene adaptively recalculates fertility windows, rolling cycle averages, and post-ovulation temperature shifts in real-time as logs are added.
 
 ---
 
 ## 📂 Project Case Study & Architecture
 
-To showcase how Bloom translates physical biological indicators into clean software architecture, this project is documented as a complete case study:
+To showcase how Selene translates physical biological indicators into clean software architecture, this project is documented as a complete case study:
 
 * **[Biological Engine & Calculations](./docs/BIOLOGY.md):** The math and biology behind rolling averages, ovulation offsets, and symptothermal double-check validation.
 * **[React State & Grid Geometry](./docs/STATE.md):** Deep-dive into hook architecture, local storage persistence, and coordinate shift calculations for the cycle-specific calendar view.
