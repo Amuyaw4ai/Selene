@@ -72,6 +72,16 @@ Total flow is quantified using the **Pictorial Blood Loss Assessment Chart (PBAC
 *   **Menstrual Cup:** Logged via direct volume markers in $mL$.
 *   **Menorrhagia Threshold:** A cumulative cycle score of **$\ge 100$** has been shown to correlate with a blood loss exceeding the **80 mL clinical threshold** for Heavy Menstrual Bleeding (HMB).
 
+### D. Interactive Staining Pad Interface (UX Innovation)
+To encourage compliance and collect accurate flow data, Selene will feature a visual **staining pad interface**:
+*   **Wysiwyg Stain Painter:** Instead of checking abstract text options, the user sees a styled vector graphic of a sanitary pad. They can slide or tap directly on the pad to grow a red stain representing what they saw.
+*   **Stain Area Percentage ($P$) Mapping:** The engine computes the stained area percentage relative to the pad canvas and converts it into the standardized PBAC scores:
+    *   **$P = 0\%$:** Spotting / Dry ($0\text{ points}$, $\sim 0\text{ mL}$)
+    *   **$0\% < P \le 20\%$:** Lightly soiled ($1\text{ point}$, $\sim 1\text{ mL}$)
+    *   **$20\% < P \le 60\%$:** Moderately soiled ($5\text{ points}$, $\sim 5\text{ mL}$)
+    *   **$60\% < P \le 100\%$:** Fully saturated ($20\text{ points}$, $\sim 20\text{ mL}$)
+*   This visual feedback removes guessing, gamifies the logging process, and guarantees clinical data accuracy.
+
 ---
 
 ## ⚙️ 3. Proposed Diagnostic Algorithms
