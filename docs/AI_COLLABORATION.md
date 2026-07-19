@@ -37,4 +37,11 @@ During development, the AI assistant proposed several flawed approaches that wou
 ### ⚠️ Defect 3: Inline Drawer Bloat & Lag
 * **The AI's Flawed Proposal:** Originally, the AI rendered the Basal Body Temperature (BBT) trend graph and the scrollable list of historical periods inline directly inside the slide-out hamburger navigation drawer.
 * **Why it was Broken:** Rendering high-density charting components and scrollable database logs inside an off-screen panel created significant rendering lag during drawer slide-out animations. It also overwhelmed the drawer's visual hierarchy, cluttering the workspace.
-* **The Correction:** The drawer was streamlined to contain clean action cards. The heavy chart rendering and database logs were decoupled and relocated into dedicated, lazy-rendered modal overlays (**`BbtModal`** and **`CycleHistoryModal`**), restoring smooth 60fps animations.
+
+### ⚠️ Defect 4: The Infinite Bleeding Bug (isOngoing Override)
+* **The AI's Flawed Proposal:** In `cycleEngine.js`, the AI originally set the `isOngoing` flag of the latest cycle using a simple position check:
+  `isOngoing: isLast` (where `isLast` checks if the period is the latest one logged in the database).
+* **Why it was Broken:** Even if the user logged an explicit `endDate` for their latest period and set its status to completed, the engine still evaluated it as `isOngoing: true` because it was the last element in the array. This caused the calendar to display active bleeding for all days after the period ended up to the current date.
+* **The Correction:** The `isOngoing` evaluator was updated to honor the presence of an explicit end date:
+  `isOngoing: isLast && (period.isOngoing || !period.endDate)`
+  This stops active bleeding calculations exactly on the logged `endDate` for completed cycles.
