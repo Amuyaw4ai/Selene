@@ -483,6 +483,22 @@ export default function CalendarGrid({
         </div>
       </div>
 
+      {/* Cycle Mode Sub-banner */}
+      {calendarMode === 'cycle' && (
+        <div className="bg-rose-50/70 border border-rose-200/60 p-2 rounded-xl flex items-center justify-between text-xs font-semibold text-rose-900">
+          <div className="flex items-center gap-1.5">
+            <span className="h-2 w-2 rounded-full bg-rose-500 animate-pulse"></span>
+            <span>Cycle #{currentCycleIndex + 1} of {allCyclesList.length}</span>
+            <span className="text-[10px] text-rose-600 font-medium">({analyzedCycles?.length || 0} Logged Cycles Total)</span>
+          </div>
+          {selectedCycleStart && (
+            <span className="text-[10px] font-bold font-mono text-rose-700 bg-white px-2 py-0.5 rounded border border-rose-200">
+              Starts {parseDate(selectedCycleStart)?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}
+            </span>
+          )}
+        </div>
+      )}
+
       {/* Weekdays Header */}
       <div className="grid grid-cols-7 gap-1 text-center text-[10px] font-bold text-slate-400 uppercase tracking-wider">
         {WEEKDAYS.map(w => (

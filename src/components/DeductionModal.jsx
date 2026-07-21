@@ -254,6 +254,12 @@ export default function DeductionModal({
               Cycle Variables Used
             </h3>
             <div className="border border-slate-150 rounded-2xl overflow-hidden divide-y divide-slate-100">
+              <div className="flex items-center justify-between p-3 text-[11px] bg-slate-50/70 font-semibold text-slate-600">
+                <span>Total Logged Cycles</span>
+                <span className="font-bold text-indigo-700 font-mono bg-white px-2 py-0.5 rounded-lg border border-slate-200">
+                  {analyzedCycles.length} Cycles ({analyzedCycles.filter(c => c.cycleLength !== null).length} Completed)
+                </span>
+              </div>
               {details.mathSteps.map((step, idx) => (
                 <div key={idx} className="flex items-center justify-between p-3 text-[11px] hover:bg-slate-50/50 transition-colors">
                   <span className="font-semibold text-slate-500">{step.label}</span>

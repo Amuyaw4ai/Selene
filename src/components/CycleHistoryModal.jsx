@@ -128,7 +128,7 @@ export default function CycleHistoryModal({
                 : 'text-slate-500 hover:text-slate-700'
             }`}
           >
-            Logged Cycles ({periods.length})
+            Logged Cycles ({periods.length} Periods / {analyzedCycles.length} Cycles)
           </button>
           <button
             onClick={() => setActiveTab(1)}
@@ -248,9 +248,13 @@ export default function CycleHistoryModal({
                       const date = parseDate(c.startDate);
                       const dateStr = date ? date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) : c.startDate;
                       const badge = c.isOngoing ? ' (Active)' : c.isProjection ? ' (Predicted)' : ' (Completed)';
+                      const totalCount = analyzedCycles ? analyzedCycles.length : 0;
+                      const labelText = c.isProjection 
+                        ? `Projected Cycle #${c.index}: ${dateStr}` 
+                        : `Cycle #${c.index} of ${totalCount}: ${dateStr}${badge}`;
                       return (
                         <option key={c.id} value={c.id}>
-                          Cycle #{c.index}: {dateStr}{badge}
+                          {labelText}
                         </option>
                       );
                     })}
@@ -277,7 +281,7 @@ export default function CycleHistoryModal({
                     <div>
                       <h4 className="font-extrabold text-slate-800 text-sm flex items-center gap-1.5">
                         <Calendar className="h-4.5 w-4.5 text-indigo-500" />
-                        Cycle starting {parseDate(selectedCycle.startDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })}
+                        Cycle #{selectedCycle.index} {selectedCycle.isProjection ? '(Projected)' : `of ${analyzedCycles.length}`} (Started {parseDate(selectedCycle.startDate).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' })})
                       </h4>
                       <p className="text-[11px] font-medium text-indigo-600 mt-1 uppercase tracking-wider">
                         {selectedCycle.isOngoing ? 'Ongoing active cycle' : selectedCycle.isProjection ? 'Predicted future cycle' : 'Completed historical cycle'}

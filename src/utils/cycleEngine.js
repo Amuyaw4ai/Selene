@@ -162,6 +162,46 @@ export function analyzeCycles(periods) {
 }
 
 /**
+ * Generates summary statistics regarding total cycles logged, completed cycles, ongoing cycles, and data surety level.
+ * @param {Array} periods 
+ * @returns {Object} Cycle summary metrics
+ */
+export function getCycleSummaryStats(periods) {
+  const analyzed = analyzeCycles(periods);
+  const totalLogged = analyzed.length;
+  const completed = analyzed.filter(c => c.cycleLength !== null);
+  const completedCount = completed.length;
+  const ongoingCount = analyzed.filter(c => c.isOngoing).length;
+  const avgLength = getAverageCycleLength(periods);
+  const avgDuration = getAveragePeriodDuration(periods);
+
+  let confidenceLevel = 'Baseline';
+  let confidenceDesc = 'Using standard 28-day default parameters. Log at least 2 period cycles to compute your personal average.';
+  if (completedCount >= 6) {
+    confidenceLevel = 'High Clinical Surety';
+    confidenceDesc = `High statistical confidence based on ${completedCount} completed cycles (${totalLogged} total logged).`;
+  } else if (completedCount >= 3) {
+    confidenceLevel = 'Moderate Surety';
+    confidenceDesc = `Stable personalized baseline derived from ${completedCount} completed cycles (${totalLogged} total logged).`;
+  } else if (completedCount >= 1) {
+    confidenceLevel = 'Emerging Baseline';
+    confidenceDesc = `Initial average calculated from ${completedCount} completed cycle (${totalLogged} total logged).`;
+  }
+
+  return {
+    analyzed,
+    totalLogged,
+    completedCount,
+    completedCycles: completed,
+    ongoingCount,
+    avgLength,
+    avgDuration,
+    confidenceLevel,
+    confidenceDesc
+  };
+}
+
+/**
  * Predicts future cycles based on history.
  * @param {Array} periods - Existing logged periods
  * @param {number} count - Number of cycles to project forward

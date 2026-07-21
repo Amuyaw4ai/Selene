@@ -36,24 +36,30 @@ export default function BbtModal({
         </p>
 
         {/* Cycle Selector */}
-        {cycles.length > 1 && (
-          <div className="flex items-center gap-2 text-xs font-semibold text-slate-600 bg-slate-50 p-2.5 rounded-xl border border-slate-200/80 w-fit shadow-3xs">
-            <Calendar className="h-4 w-4 text-indigo-500" />
-            <span>Select Cycle:</span>
-            <select
-              value={selectedCycleId}
-              onChange={(e) => setSelectedCycleId(e.target.value)}
-              className="bg-transparent font-bold text-slate-800 focus:outline-hidden cursor-pointer"
-            >
-              {cycles.map((c) => {
-                const start = parseDate(c.startDate)?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) || c.startDate;
-                return (
-                  <option key={c.id} value={c.id}>
-                    Cycle starting {start} {c.isOngoing ? '(Ongoing)' : ''}
-                  </option>
-                );
-              })}
-            </select>
+        {cycles.length > 0 && (
+          <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-slate-50 p-3 rounded-xl border border-slate-200/80 shadow-3xs">
+            <div className="flex items-center gap-2 text-xs font-semibold text-slate-700">
+              <Calendar className="h-4 w-4 text-indigo-500 shrink-0" />
+              <span>Select Cycle ({cycles.length} Total Logged):</span>
+              <select
+                value={selectedCycleId}
+                onChange={(e) => setSelectedCycleId(e.target.value)}
+                className="bg-white border border-slate-200 rounded-lg px-2.5 py-1 text-xs font-bold text-slate-800 focus:outline-hidden cursor-pointer"
+              >
+                {cycles.map((c, index) => {
+                  const cycleNum = cycles.length - index;
+                  const start = parseDate(c.startDate)?.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' }) || c.startDate;
+                  return (
+                    <option key={c.id} value={c.id}>
+                      Cycle #{cycleNum} of {cycles.length} (Started {start}) {c.isOngoing ? '• Active' : ''}
+                    </option>
+                  );
+                })}
+              </select>
+            </div>
+            <div className="text-[10px] font-bold text-indigo-700 bg-indigo-50 border border-indigo-100 px-2 py-1 rounded-md self-start sm:self-auto">
+              {cycles.length} Total Cycles Analyzed
+            </div>
           </div>
         )}
 
@@ -63,7 +69,9 @@ export default function BbtModal({
             <BbtChart 
               latestPeriod={selectedCycle} 
               dailySymptoms={dailySymptoms} 
-              averageCycleLength={averageCycleLength} 
+              averageCycleLength={averageCycleLength}
+              cycleIndex={cycles.length - cycles.findIndex(c => c.id === selectedCycle.id)}
+              totalCycles={cycles.length}
             />
           ) : (
             <div className="text-center py-12 text-slate-400 italic text-xs">

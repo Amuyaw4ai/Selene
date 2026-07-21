@@ -152,6 +152,10 @@ function App() {
     return null;
   }, [latestPeriod]);
 
+  const completedCyclesCount = useMemo(() => {
+    return analyzedCycles.filter(c => c.cycleLength !== null).length;
+  }, [analyzedCycles]);
+
   // Current Cycle Phase (Menstrual, Follicular, Ovulatory, Luteal)
   const currentCyclePhase = useMemo(() => {
     if (!currentCycleDay) return 'Log a period to begin';
@@ -242,10 +246,10 @@ function App() {
           <div className="flex items-center gap-3">
             <span className="text-xs font-bold text-slate-500 hidden sm:inline">Hello, {userProfile?.name}</span>
             
-            {/* Analytics Insights Button */}
+            {/* Direct Link to Dedicated Analytics View */}
             <button
-              onClick={() => setCurrentView(currentView === 'analytics' ? 'dashboard' : 'analytics')}
-              className={`px-3 py-1.5 border rounded-xl text-xs font-bold shadow-3xs cursor-pointer select-none transition-all flex items-center gap-1.5 active:scale-95 ${
+              onClick={() => setCurrentView('analytics')}
+              className={`px-3 py-1.5 rounded-xl border text-xs font-bold transition-all shadow-2xs flex items-center gap-1.5 cursor-pointer select-none ${
                 currentView === 'analytics'
                   ? 'bg-indigo-650 border-indigo-700 text-white hover:bg-indigo-750'
                   : 'bg-indigo-50 hover:bg-indigo-100/80 border-indigo-200/50 text-indigo-650'
@@ -292,8 +296,13 @@ function App() {
                 <div className="text-2xl font-extrabold text-slate-900">
                   {currentCycleDay ? `Day ${currentCycleDay}` : 'No cycle active'}
                 </div>
-                <div className="text-xs text-slate-550 mt-1">
-                  {currentCyclePhase}
+                <div className="text-xs text-slate-550 mt-1 flex justify-between items-center">
+                  <span>{currentCyclePhase}</span>
+                  {analyzedCycles.length > 0 && (
+                    <span className="text-[10px] font-extrabold text-indigo-650 bg-indigo-50 px-1.5 py-0.5 rounded border border-indigo-100">
+                      Cycle #{analyzedCycles.length} of {analyzedCycles.length}
+                    </span>
+                  )}
                 </div>
               </div>
 
@@ -314,9 +323,9 @@ function App() {
                 </div>
                 <div className="text-2xl font-extrabold text-slate-900">{averageCycleLength} Days</div>
                 <div className="text-xs text-slate-550 mt-1">
-                  {periods.length < 2 
-                    ? 'Using standard fallback (28d)' 
-                    : `Based on ${periods.length - 1} completed cycles`}
+                  {completedCyclesCount === 0 
+                    ? `Default baseline (0 completed / ${analyzedCycles.length} logged)` 
+                    : `Based on ${completedCyclesCount} completed cycle${completedCyclesCount > 1 ? 's' : ''} (${analyzedCycles.length} total logged)`}
                 </div>
               </div>
 
@@ -342,7 +351,7 @@ function App() {
                 </div>
                 <div className="text-xs text-slate-550 mt-1">
                   {nextPredictedOvulationInfo 
-                    ? `Predicted: ${nextPredictedOvulationInfo.formattedDate}` 
+                    ? `Predicted: ${nextPredictedOvulationInfo.formattedDate} (Cycle #${analyzedCycles.length + 1})` 
                     : 'Log a period to project'}
                 </div>
               </div>
@@ -366,7 +375,7 @@ function App() {
                   {fertilityStatusToday.text}
                 </div>
                 <div className="text-xs text-slate-550 mt-1 font-medium leading-relaxed">
-                  {fertilityStatusToday.desc}
+                  {fertilityStatusToday.desc} {analyzedCycles.length > 0 ? `• Cycle #${analyzedCycles.length}` : ''}
                 </div>
               </div>
             </div>
